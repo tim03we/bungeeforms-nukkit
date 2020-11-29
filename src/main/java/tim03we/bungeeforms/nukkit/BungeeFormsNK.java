@@ -41,7 +41,6 @@ public class BungeeFormsNK extends PluginBase implements Listener {
         String[] buttons = buttonString.split(",");
         SimpleForm.Builder form = new SimpleForm.Builder(title, content);
         for (String button : buttons) {
-            System.out.println("BUTTON: " + button);
             String[] b = button.split(";");
             String[] image = b[1].split(":");
             if(image[1].equals("null") && image[2].equals("null")) {

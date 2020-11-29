@@ -1,6 +1,9 @@
 # BungeeForms
 Send Simple Forms and Custom Forms from Bungeecord to Nukkit. Simplify your systems and much more. 
 
+## Important
+Note that the plugin must be installed on both servers. So once on the Bungeecord and Nukkit server. 
+
 ## Example
 Please note that you take the package `tim03we.bungeeforms.bungee` and not the one from Nukkit.
 ```java
