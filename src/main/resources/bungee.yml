@@ -1,0 +1,5 @@
+name: BungeeForms
+main: tim03we.bungeeforms.bungee.BungeeFormsWD
+author: tim03we
+version: 1.0.0
+description: A Waterdog Plugin
