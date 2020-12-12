@@ -46,6 +46,12 @@ public class CustomForm {
                 stringBuilder.append("dropdown;" + dropdown.getText() + ";" + convertToString(dropdown.getOptions()) + ";" + dropdown.getDefaultOptionIndex());
             } else if(element instanceof ElementInput) {
                 ElementInput input = (ElementInput) element;
+                String text = "null";
+                String placeholder = "null";
+                String defaultText = "null";
+                if(!input.getText().isEmpty()) text = input.getText();
+                if(!input.getPlaceHolder().isEmpty()) placeholder = input.getPlaceHolder();
+                if(!input.getDefaultText().isEmpty()) defaultText = input.getDefaultText();
                 stringBuilder.append("input;" + input.getText() + ";" + input.getPlaceHolder() + ";" + input.getDefaultText());
             } else if(element instanceof ElementLabel) {
                 ElementLabel label = (ElementLabel) element;
@@ -69,6 +75,7 @@ public class CustomForm {
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
         out.writeUTF("customform"); // the channel could be whatever you want
         out.writeUTF(string); // this data could be whatever you want
+        System.out.println("INP: " + string);
         player.getServer().getInfo().sendData( "send:form", out.toByteArray() );
     }
 

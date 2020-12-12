@@ -51,3 +51,6 @@ public class WaterdogTest extends Plugin implements Listener {
     }
 }
 ```
+
+# Credits
+This simple API for the Forms could only be done by the [@llamadevelopment](https://github.com/llamadevelopment) team.

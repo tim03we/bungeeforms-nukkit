@@ -11,6 +11,7 @@ import cn.nukkit.network.protocol.ScriptCustomEventPacket;
 import cn.nukkit.plugin.PluginBase;
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
+import tim03we.bungeeforms.Utils;
 import tim03we.bungeeforms.nukkit.forms.FormAPI;
 import tim03we.bungeeforms.nukkit.forms.custom.CustomForm;
 import tim03we.bungeeforms.nukkit.forms.simple.SimpleForm;
@@ -37,16 +38,20 @@ public class BungeeFormsNK extends PluginBase implements Listener {
         String id = ex[1];
         String title = ex[2];
         String content = ex[3];
-        String buttonString = input.split("#")[1];
+        //String buttonString = input.split("#")[1];
+        String buttonString = "";
+        if(!Utils.isOutOfBound(input, "#", 1)) buttonString = input.split("#")[1];
         String[] buttons = buttonString.split(",");
         SimpleForm.Builder form = new SimpleForm.Builder(title, content);
-        for (String button : buttons) {
-            String[] b = button.split(";");
-            String[] image = b[1].split(":");
-            if(image[1].equals("null") && image[2].equals("null")) {
-                form.addButton(new ElementButton(b[0]));
-            } else {
-                form.addButton(new ElementButton(b[0], new ElementButtonImageData(image[1], image[2])));
+        if(!buttonString.isEmpty()) {
+            for (String button : buttons) {
+                String[] b = button.split(";");
+                String[] image = b[1].split(":");
+                if(image[1].equals("null") && image[2].equals("null")) {
+                    form.addButton(new ElementButton(b[0]));
+                } else {
+                    form.addButton(new ElementButton(b[0], new ElementButtonImageData(image[1], image[2])));
+                }
             }
         }
         form.onSubmit((p, response) -> {
@@ -82,7 +87,13 @@ public class BungeeFormsNK extends PluginBase implements Listener {
                 }
                 form.addElement(new ElementDropdown(data[1], list, Integer.parseInt(data[3])));
             } else if(data[0].equals("input")) {
-                form.addElement(new ElementInput(data[1], data[2], data[3]));
+                if(!Utils.isOutOfBound(data, 2) && Utils.isOutOfBound(data, 3)) {
+                    form.addElement(new ElementInput(data[1], data[2]));
+                } else if(Utils.isOutOfBound(data, 2) && Utils.isOutOfBound(data, 3)) {
+                    form.addElement(new ElementInput(data[1]));
+                } else {
+                    form.addElement(new ElementInput(data[1], data[2], data[3]));
+                }
             } else if(data[0].equals("label")) {
                 form.addElement(new ElementLabel(data[1]));
             } else if(data[0].equals("slider")) {
