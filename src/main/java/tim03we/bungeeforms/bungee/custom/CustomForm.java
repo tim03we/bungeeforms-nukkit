@@ -75,7 +75,6 @@ public class CustomForm {
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
         out.writeUTF("customform"); // the channel could be whatever you want
         out.writeUTF(string); // this data could be whatever you want
-        System.out.println("INP: " + string);
         player.getServer().getInfo().sendData( "send:form", out.toByteArray() );
     }
 
@@ -91,9 +90,9 @@ public class CustomForm {
     private String convertToString(List<String> stringList) {
         StringBuilder stringBuilder = new StringBuilder();
         for (String s : stringList) {
-            stringBuilder.append(s).append(",");
+            stringBuilder.append(s).append(",,,");
         }
-        return stringBuilder.toString().substring(0, (stringBuilder.toString().length() - 1));
+        return stringBuilder.toString().substring(0, (stringBuilder.toString().length() - 3));
     }
 
     public static class Builder {

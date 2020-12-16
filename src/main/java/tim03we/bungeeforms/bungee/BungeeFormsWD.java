@@ -26,7 +26,6 @@ public class BungeeFormsWD extends Plugin implements Listener {
             if (event.getTag().equalsIgnoreCase("send:form")) {
                 DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(event.getData()));
                 String type = inputStream.readUTF().toLowerCase();
-                System.out.println("TYPE: " + type);
                 if(type.equals("simpleform")) {
                     String id = inputStream.readUTF();
                     String playerName = inputStream.readUTF();
@@ -41,11 +40,19 @@ public class BungeeFormsWD extends Plugin implements Listener {
             } else if(event.getTag().equalsIgnoreCase("interact:event")) {
                 DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(event.getData()));
                 String type = inputStream.readUTF();
-                String[] itemString = inputStream.readUTF().split(";:");
-                String[] blockString = inputStream.readUTF().split(";:");
+                String itemData = inputStream.readUTF();
+                String blockData = inputStream.readUTF();
+                String[] itemString = itemData.split(";:");
+                String[] blockString = blockData.split(";:");
                 String playerName = inputStream.readUTF();
-                Item item = new Item(itemString[0], itemString[1], itemString[2], itemString[3]);
-                Block block = new Block(blockString[0], blockString[1]);
+                Item item = new Item("-1", "-1", "0", "null");
+                if(!itemString[0].equals("null") && !itemString[1].equals("null") && !itemString[2].equals("null")) {
+                    item = new Item(itemString[0], itemString[1], itemString[2], itemString[3]);
+                }
+                Block block = new Block("-1", "-1");
+                if(!blockString[0].equals("null") && !blockString[1].equals("null")) {
+                    block = new Block(blockString[0], blockString[1]);
+                }
                 if(type.equals("right_click_block")) {
                     ProxyServer.getInstance().getPluginManager().callEvent(new ProxiedPlayerInteractEvent(ProxyServer.getInstance().getPlayer(playerName), InteractType.RIGHT_CLICK_BLOCK, item, block));
                 } else if(type.equals("right_click_air")) {

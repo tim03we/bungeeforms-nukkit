@@ -33,7 +33,6 @@ public class BungeeFormsNK extends PluginBase implements Listener {
 
     public void handleSimpleForm(String input) {
         String[] ex = input.split(";");
-        System.out.println(input);
         Player player = Server.getInstance().getPlayer(ex[0]);
         String id = ex[1];
         String title = ex[2];
@@ -41,7 +40,7 @@ public class BungeeFormsNK extends PluginBase implements Listener {
         //String buttonString = input.split("#")[1];
         String buttonString = "";
         if(!Utils.isOutOfBound(input, "#", 1)) buttonString = input.split("#")[1];
-        String[] buttons = buttonString.split(",");
+        String[] buttons = buttonString.split(",,,");
         SimpleForm.Builder form = new SimpleForm.Builder(title, content);
         if(!buttonString.isEmpty()) {
             for (String button : buttons) {
@@ -82,7 +81,7 @@ public class BungeeFormsNK extends PluginBase implements Listener {
             String[] data = s.split(";");
             if(data[0].equals("dropdown")) {
                 List<String> list = new ArrayList<>();
-                for (String s2 : data[2].split(",")) {
+                for (String s2 : data[2].split(",,,")) {
                     list.add(s2);
                 }
                 form.addElement(new ElementDropdown(data[1], list, Integer.parseInt(data[3])));
@@ -100,7 +99,7 @@ public class BungeeFormsNK extends PluginBase implements Listener {
                 form.addElement(new ElementSlider(data[1], Float.parseFloat(data[2]), Float.parseFloat(data[3]), Integer.parseInt(data[4]), Float.parseFloat(data[5])));
             } else if(data[0].equals("stepslider")) {
                 List<String> list = new ArrayList<>();
-                for (String s2 : data[2].split(",")) {
+                for (String s2 : data[2].split(",,,")) {
                     list.add(s2);
                 }
                 form.addElement(new ElementStepSlider(data[1], list, Integer.parseInt(data[3])));

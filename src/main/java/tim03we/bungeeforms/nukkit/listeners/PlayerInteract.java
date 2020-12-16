@@ -24,12 +24,12 @@ public class PlayerInteract implements Listener {
             String itemString;
             String blockString;
 
-            if(item == null) itemString = "null";
+            if(item == null) itemString = "null;:null;:null;:null";
             else {
                 if(item.hasCustomName()) itemString = item.getId() + ";:" + item.getDamage() + ";:" + item.getCount() + ";:" + item.getCustomName();
                 else itemString = item.getId() + ";:" + item.getDamage() + ";:" + item.getCount() + ";:" + "null";
             }
-            if(block == null) blockString = "null";
+            if(block == null) blockString = "null;:null";
             else blockString = block.getId() + ";:" + block.getDamage();
             PlayerInteractEvent.Action action = event.getAction();
 

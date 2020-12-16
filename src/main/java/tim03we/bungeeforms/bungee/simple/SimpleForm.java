@@ -41,8 +41,8 @@ public class SimpleForm {
             stringBuilder.append(elementButton.getText() + ";image:");
             if(elementButton.getImage() != null) {
                 stringBuilder.append(elementButton.getImage().getType() + ":");
-                stringBuilder.append(elementButton.getImage().getData() + ",");
-            } else stringBuilder.append("null:null,");
+                stringBuilder.append(elementButton.getImage().getData() + ",,,");
+            } else stringBuilder.append("null:null,,,");
         }
         //System.out.println("Buttons: " + stringBuilder.toString());
         FormHandler.simplePending.put(id, this);
